@@ -1,4 +1,5 @@
 extends Node
+var delete = 100
 
 @onready var noise_preview: MeshInstance3D = %noisePreview
 var material : StandardMaterial3D = StandardMaterial3D.new()
@@ -15,8 +16,8 @@ func _create_material_and_assign() -> void:
 	self.mesh.surface_set_material(0, material)
 
 func _create_noise_texture_and_assign() -> void:
-	material.albedo_texture = landmassGenerator._generate_noise_map(100,100, 1.0)
+	material.albedo_texture = landmassGenerator._generate_noise_map(delete,delete, 1.0)
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-	material.albedo_texture = landmassGenerator._generate_noise_map(100, 100, value)
+	material.albedo_texture = landmassGenerator._generate_noise_map(delete, delete, value)
