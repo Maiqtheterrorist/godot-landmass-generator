@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://di6sfdi74xdvh"]
+
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/landmasGenerationScript.gd" id="1_4k62n"]
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/utilityScripts/cameraMovement.gd" id="1_pajay"]
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/utilityScripts/landmass2DNoisePreviewSetup.gd" id="2_k0wxw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1iky"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_xg7dh"]
+sky_material = SubResource("ProceduralSkyMaterial_p1iky")
+
+[sub_resource type="Environment" id="Environment_dm21a"]
+background_mode = 2
+sky = SubResource("Sky_xg7dh")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_df3rt"]
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="world" type="Node3D"]
+
+[node name="landmasGeneratorComponent" type="Node" parent="."]
+script = ExtResource("1_4k62n")
+
+[node name="utility" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="utility"]
+environment = SubResource("Environment_dm21a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="utility"]
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="utility"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44474)
+script = ExtResource("1_pajay")
+
+[node name="meshes" type="Node" parent="."]
+
+[node name="noisePreview" type="MeshInstance3D" parent="meshes"]
+unique_name_in_owner = true
+mesh = SubResource("QuadMesh_df3rt")
+script = ExtResource("2_k0wxw")
+
+[node name="gui" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="gui"]
+
+[node name="Control" type="Control" parent="gui/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="GridContainer" type="GridContainer" parent="gui/CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HSlider" type="HSlider" parent="gui/CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+min_value = 0.02
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[connection signal="value_changed" from="gui/CanvasLayer/Control/GridContainer/HSlider" to="meshes/noisePreview" method="_on_h_slider_value_changed"]
