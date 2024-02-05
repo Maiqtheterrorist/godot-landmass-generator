@@ -16,7 +16,7 @@ func _create_material_and_assign() -> void:
 	self.mesh.surface_set_material(0, material)
 
 func _create_noise_texture_and_assign() -> void:
-	material.albedo_texture = landmassGenerator._generate_noise_map(delete,delete, 1.0)
+	material.albedo_texture = landmassGenerator._generate_noise_map(delete,delete, 27.3)
 
 
 func _on_h_slider_value_changed(value: float) -> void:
