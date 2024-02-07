@@ -59,13 +59,3 @@ offset_bottom = 648.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="HSlider" type="HSlider" parent="gui/CanvasLayer/Control/GridContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-min_value = 0.02
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[connection signal="value_changed" from="gui/CanvasLayer/Control/GridContainer/HSlider" to="meshes/noisePreview" method="_on_h_slider_value_changed"]
