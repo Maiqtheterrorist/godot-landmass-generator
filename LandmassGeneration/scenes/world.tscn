@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://di6sfdi74xdvh"]
+[gd_scene load_steps=11 format=3 uid="uid://di6sfdi74xdvh"]
 
 [ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/landmasGenerationScript.gd" id="1_4k62n"]
 [ext_resource type="Script" path="res://LandmassGeneration/scripts/utilityScripts/cameraMovement.gd" id="1_pajay"]
@@ -17,9 +17,17 @@ sky = SubResource("Sky_xg7dh")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trchi"]
+
 [sub_resource type="QuadMesh" id="QuadMesh_df3rt"]
+material = SubResource("StandardMaterial3D_trchi")
 subdivide_width = 10
 subdivide_depth = 10
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nqd7t"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qyb5d"]
+noise = SubResource("FastNoiseLite_nqd7t")
 
 [node name="world" type="Node3D"]
 
@@ -45,6 +53,11 @@ unique_name_in_owner = true
 mesh = SubResource("QuadMesh_df3rt")
 script = ExtResource("2_k0wxw")
 
+[node name="TextureRect" type="TextureRect" parent="meshes"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_qyb5d")
+
 [node name="gui" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="gui"]
@@ -54,8 +67,10 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
+metadata/_edit_use_anchors_ = true
 
 [node name="GridContainer" type="GridContainer" parent="gui/CanvasLayer/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
