@@ -13,9 +13,9 @@ static var images = {
 	
 }
 func _ready() -> void:
-	_fastNoiseLite_initializer()
+	pass
 
-func _fastNoiseLite_initializer():
+static func _fastNoiseLite_initializer():
 	fastNoiseLite.noise_type = FastNoiseLite.TYPE_PERLIN
 	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_NONE
 
@@ -28,11 +28,12 @@ static func _generate_noise_map(width : int, height : int, scale : float, octave
 		var noiseImage : Image = Image.create(width,height,false,Image.FORMAT_RGBA8)
 		usableFrequency = pow(lacunarity, i)
 		usableAmplitude = pow(persistance, i)
+		prints(usableAmplitude,usableFrequency)
 		
 		for y in height:
 			for x in width:
-				var sampleY = (y/scale) * usableFrequency
-				var sampleX = (x/scale) * usableFrequency
+				var sampleY = y/scale * usableFrequency
+				var sampleX = x/scale * usableFrequency
 				
 				var combinedImagePixel = combinedImages.get_pixel(x, y)
 				var fnlPixel = Color.from_hsv(0.0,0.0,(fastNoiseLite.get_noise_2d(sampleX,sampleY)+1)/2)*usableAmplitude
