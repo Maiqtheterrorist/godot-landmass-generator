@@ -31,8 +31,8 @@ static func _generate_noise_map(width : int, height : int, scale : float, octave
 		
 		for y in height:
 			for x in width:
-				var sampleY = y/scale * usableFrequency
-				var sampleX = x/scale * usableFrequency
+				var sampleY = (y/scale) * usableFrequency
+				var sampleX = (x/scale) * usableFrequency
 				
 				var combinedImagePixel = combinedImages.get_pixel(x, y)
 				var fnlPixel = Color.from_hsv(0.0,0.0,(fastNoiseLite.get_noise_2d(sampleX,sampleY)+1)/2)*usableAmplitude
