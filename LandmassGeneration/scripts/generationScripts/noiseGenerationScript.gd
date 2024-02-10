@@ -6,12 +6,9 @@ static var fastNoiseLite : FastNoiseLite = FastNoiseLite.new()
 static var combinedImages : Image 
 static var finalTexture
 
-static var textures : Dictionary = {
-	
-}
-static var images = {
-	
-}
+static var textures : Dictionary = {}
+static var images = {}
+
 func _ready() -> void:
 	pass
 

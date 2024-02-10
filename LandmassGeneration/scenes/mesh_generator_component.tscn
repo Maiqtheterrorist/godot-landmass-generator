@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq6kqaarvjv51"]
+
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/meshGeneratorScript.gd" id="1_0qgpq"]
+
+[node name="meshGeneratorComponent" type="Node"]
+script = ExtResource("1_0qgpq")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbmvoh48ogtxi"]
+
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/noiseGenerationScript.gd" id="1_qrmc1"]
+
+[node name="noiseGeneratorComponent" type="Node"]
+script = ExtResource("1_qrmc1")
