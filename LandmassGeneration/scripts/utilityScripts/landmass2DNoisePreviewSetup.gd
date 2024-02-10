@@ -1,6 +1,7 @@
-extends TextureRect
+extends Node2D
 
-@onready var noise_preview: TextureRect = $"."
+@onready var noise_preview: TextureRect = $noisePreview
+
 
 
 var generationData : Dictionary = {
@@ -30,18 +31,18 @@ func _create_noise_texture_and_assign() -> void:
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-	$"../Control/GridContainer/LineEdit".text = "persistance " + str(value)
+	%LineEdit.text = "persistance " + str(value)
 	generationData["persistance"] = value
 	_create_noise_texture_and_assign()
 
 
 func _on_h_slider_2_value_changed(value: float) -> void:
-	$"../Control/GridContainer/LineEdit2".text = "lacunarity " + str(value)
+	%LineEdit2.text = "lacunarity " + str(value)
 	generationData["lacunarity"] = value
 	_create_noise_texture_and_assign()
 
 
 func _on_h_slider_3_value_changed(value: float) -> void:
-	$"../Control/GridContainer/LineEdit3".text = "scale " + str(value)
+	%LineEdit3.text = "scale " + str(value)
 	generationData["scale"] = value
 	_create_noise_texture_and_assign()
