@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkkop3ktqpvt5"]
+
+[ext_resource type="Script" path="res://MeshInstance3D.gd" id="1_0ex06"]
+[ext_resource type="PackedScene" uid="uid://che0je01x1gc8" path="res://plane.blend" id="2_8pio8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o6r61"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7ar06"]
+sky_material = SubResource("ProceduralSkyMaterial_o6r61")
+
+[sub_resource type="Environment" id="Environment_4lhyo"]
+background_mode = 2
+sky = SubResource("Sky_7ar06")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+script = ExtResource("1_0ex06")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4lhyo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="plane" parent="." instance=ExtResource("2_8pio8")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.921077, 0.389381, 0, -0.389381, 0.921077, 0, 0.87469, 1.70404)
+current = true
+
+[editable path="plane"]

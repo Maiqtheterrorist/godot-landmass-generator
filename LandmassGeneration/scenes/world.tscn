@@ -1,17 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://di6sfdi74xdvh"]
+[gd_scene load_steps=9 format=3 uid="uid://di6sfdi74xdvh"]
 
-[ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/landmasGenerationScript.gd" id="1_4k62n"]
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/generationScripts/noiseGenerationScript.gd" id="1_4k62n"]
+[ext_resource type="Script" path="res://LandmassGeneration/scripts/utilityScripts/cameraMovement.gd" id="1_wxvt6"]
 [ext_resource type="PackedScene" uid="uid://dl7m6a1lw6s40" path="res://noise_preview.tscn" id="2_hbny0"]
+[ext_resource type="Script" path="res://LandmassGeneration/scenes/meshGeneratorComponent.gd" id="3_j6vwi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qk1lf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4e7pf"]
+sky_material = SubResource("ProceduralSkyMaterial_qk1lf")
+
+[sub_resource type="Environment" id="Environment_7ru5r"]
+background_mode = 2
+sky = SubResource("Sky_4e7pf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_akwvr"]
 
 [node name="world" type="Node3D"]
 
-[node name="landmasGeneratorComponent" type="Node" parent="."]
-script = ExtResource("1_4k62n")
-
 [node name="utility" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="utility"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
+current = true
+fov = 90.0
+script = ExtResource("1_wxvt6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="utility"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="utility"]
+environment = SubResource("Environment_7ru5r")
 
 [node name="meshes" type="Node" parent="."]
 
 [node name="noisePreview" parent="meshes" instance=ExtResource("2_hbny0")]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7179, 0, 0)
+mesh = SubResource("BoxMesh_akwvr")
 
 [node name="gui" type="Node" parent="."]
+
+[node name="components" type="Node" parent="."]
+
+[node name="noiseGeneratorComponent" type="Node" parent="components"]
+script = ExtResource("1_4k62n")
+
+[node name="meshGeneratorComponent" type="Node" parent="components"]
+script = ExtResource("3_j6vwi")

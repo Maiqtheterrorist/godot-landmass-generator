@@ -16,7 +16,7 @@ var finalValues : Dictionary = {
 }
 
 func _ready() -> void:
-	landmassGenerator._fastNoiseLite_initializer()
+	noiseGenerator._fastNoiseLite_initializer()
 	noise_preview.scale = scale*5
 	_setup_noise_preview_node()
 
@@ -26,7 +26,7 @@ func _setup_noise_preview_node() -> void:
 
 func _create_noise_texture_and_assign() -> void:
 	noise_preview.size = Vector2(generationData.get("width"), generationData.get("height"))
-	noise_preview.texture = landmassGenerator._generate_noise_map(generationData.get("width"), generationData.get("height"), generationData.get("scale"), generationData.get("octaves"), generationData.get("persistance"), generationData.get("lacunarity"))
+	noise_preview.texture = noiseGenerator._generate_noise_map(generationData.get("width"), generationData.get("height"), generationData.get("scale"), generationData.get("octaves"), generationData.get("persistance"), generationData.get("lacunarity"))
 
 
 func _on_h_slider_value_changed(value: float) -> void:
