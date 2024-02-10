@@ -9,8 +9,6 @@ static var finalTexture
 static var textures : Dictionary = {}
 static var images = {}
 
-func _ready() -> void:
-	pass
 
 static func _fastNoiseLite_initializer():
 	fastNoiseLite.noise_type = FastNoiseLite.TYPE_PERLIN

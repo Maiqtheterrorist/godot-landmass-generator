@@ -1,12 +1,12 @@
 extends Node2D
 
 @onready var noise_preview: TextureRect = $noisePreview
-
+var mesh : MeshInstance3D
 
 
 var generationData : Dictionary = {
-	 "width" : 100,
-	"height" : 100,
+	 "width" : 12,
+	"height" : 12,
 	"scale" : 0.1,
 	"octaves" : 4,
 	"persistance" : 0.5,
@@ -18,7 +18,7 @@ var finalValues : Dictionary = {
 
 func _ready() -> void:
 	noiseGenerator._fastNoiseLite_initializer()
-	noise_preview.scale = scale*5
+	noise_preview.scale = scale*50
 	_setup_noise_preview_node()
 
 func _setup_noise_preview_node() -> void:
@@ -35,7 +35,6 @@ func _on_h_slider_value_changed(value: float) -> void:
 	generationData["persistance"] = value
 	_create_noise_texture_and_assign()
 
-
 func _on_h_slider_2_value_changed(value: float) -> void:
 	%LineEdit2.text = "lacunarity " + str(value)
 	generationData["lacunarity"] = value
@@ -46,3 +45,16 @@ func _on_h_slider_3_value_changed(value: float) -> void:
 	%LineEdit3.text = "scale " + str(value)
 	generationData["scale"] = value
 	_create_noise_texture_and_assign()
+
+
+
+
+func _on_button_pressed() -> void:
+	visible = false
+	mesh = landmassGenerator._triangulatedQuad(generationData.get("width"), generationData.get("height"))
+	var world = get_node_or_null("/root/world")
+	world.add_child(mesh)
+
+#func _process(delta: float) -> void:
+	#if mesh:
+		#mesh.rotate_x(-0.5 * delta)
