@@ -5,8 +5,8 @@ var chunk : MeshInstance3D
 
 
 var generationData : Dictionary = {
-	 "width" : 12,
-	"height" : 12,
+	 "width" : 128,
+	"height" : 128,
 	"scale" : 0.1,
 	"octaves" : 4,
 	"persistance" : 0.5,
@@ -18,7 +18,7 @@ var finalValues : Dictionary = {
 
 func _ready() -> void:
 	noiseGenerator._fastNoiseLite_initializer()
-	noise_preview.scale = scale*50
+	noise_preview.scale = scale*5
 	_setup_noise_preview_node()
 
 func _setup_noise_preview_node() -> void:

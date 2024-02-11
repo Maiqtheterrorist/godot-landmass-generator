@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://di6sfdi74xdvh"]
+[gd_scene load_steps=10 format=3 uid="uid://di6sfdi74xdvh"]
 
 [ext_resource type="Script" path="res://LandmassGeneration/scripts/utilityScripts/cameraMovement.gd" id="1_wxvt6"]
 [ext_resource type="PackedScene" uid="uid://dl7m6a1lw6s40" path="res://noise_preview.tscn" id="2_hbny0"]
@@ -18,18 +18,25 @@ sky = SubResource("Sky_4e7pf")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2u6x"]
+albedo_color = Color(0.270588, 0.52549, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lmdyo"]
+material = SubResource("StandardMaterial3D_c2u6x")
+size = Vector2(128, 128)
+
 [node name="world" type="Node3D"]
 
 [node name="utility" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="utility"]
-transform = Transform3D(1, 0, 0, 0, 0.823641, 0.567111, 0, -0.567111, 0.823641, 6, 6, 10)
+transform = Transform3D(-1, 5.0248e-08, -1.10137e-07, -2.10734e-08, 0.823641, 0.567111, 1.19209e-07, 0.567111, -0.823641, 6, 6, 10)
 current = true
 fov = 90.0
 script = ExtResource("1_wxvt6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="utility"]
-transform = Transform3D(-0.0770673, -0.88065, 0.467458, -0.00273708, 0.469037, 0.883174, -0.997022, 0.0667844, -0.0385579, 0, 0, 0)
+transform = Transform3D(-0.0564303, -0.291054, 0.955041, 0.0525594, 0.954373, 0.293956, -0.997022, 0.0667844, -0.0385579, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="utility"]
@@ -40,6 +47,10 @@ environment = SubResource("Environment_7ru5r")
 [node name="meshes" type="Node" parent="."]
 
 [node name="noisePreview" parent="meshes" instance=ExtResource("2_hbny0")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.8735, 5.14491, 71.4123)
+mesh = SubResource("PlaneMesh_lmdyo")
 
 [node name="gui" type="Node" parent="."]
 
