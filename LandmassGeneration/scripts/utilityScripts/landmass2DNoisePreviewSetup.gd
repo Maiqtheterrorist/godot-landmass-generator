@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var noise_preview: TextureRect = $noisePreview
-var mesh : MeshInstance3D
+var chunk : MeshInstance3D
 
 
 var generationData : Dictionary = {
@@ -51,9 +51,13 @@ func _on_h_slider_3_value_changed(value: float) -> void:
 
 func _on_button_pressed() -> void:
 	visible = false
-	mesh = landmassGenerator._triangulatedQuad(generationData.get("width"), generationData.get("height"))
+	chunk = landmassGenerator._triangulatedQuad(generationData.get("width"), generationData.get("height"))
+	var mater = StandardMaterial3D.new()
+	
+	mater.albedo_color = Color.AQUA
+	
 	var world = get_node_or_null("/root/world")
-	world.add_child(mesh)
+	world.add_child(chunk)
 
 #func _process(delta: float) -> void:
 	#if mesh:
