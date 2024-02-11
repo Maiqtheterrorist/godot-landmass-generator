@@ -49,7 +49,7 @@ environment = SubResource("Environment_7ru5r")
 [node name="noisePreview" parent="meshes" instance=ExtResource("2_hbny0")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="meshes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.8735, 5.14491, 71.4123)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 5.145, 68)
 mesh = SubResource("PlaneMesh_lmdyo")
 
 [node name="gui" type="Node" parent="."]
