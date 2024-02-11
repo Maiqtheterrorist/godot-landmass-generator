@@ -9,7 +9,3 @@ func _process(delta: float) -> void:
 		global_position += Vector3.RIGHT * speed * delta
 	if Input.is_action_pressed("ui_left"):
 		global_position += Vector3.LEFT * speed * delta
-	if Input.is_action_pressed("ui_zoom_in"):
-		global_position += Vector3.FORWARD * speed * delta
-	if Input.is_action_pressed("ui_zoom_out"):
-		global_position += Vector3.BACK * speed * delta

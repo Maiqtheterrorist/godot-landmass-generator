@@ -11,7 +11,7 @@ static var images = {}
 
 
 static func _fastNoiseLite_initializer():
-	fastNoiseLite.noise_type = FastNoiseLite.TYPE_PERLIN
+	fastNoiseLite.noise_type = FastNoiseLite.TYPE_CELLULAR
 	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_NONE
 
 static func _generate_noise_map(width : int, height : int, scale : float, octaves : int, persistance : float, lacunarity : float) -> ImageTexture:

@@ -7,7 +7,7 @@ static var surfaceTool : SurfaceTool = SurfaceTool.new()
 static var vertices = []
 
 
-static var height = 10
+static var height = 15
 
 
 static func _triangulatedQuad(worldLength, worldWidth):
@@ -37,6 +37,8 @@ static func _triangulatedQuad(worldLength, worldWidth):
 		surfaceTool.add_vertex(Vector3(x,y,z))
 	surfaceTool.generate_normals()
 	surfaceTool.commit(arrayMesh)
+	
 	vertices.clear()
 	meshInstance.mesh = arrayMesh
+	meshInstance.create_trimesh_collision()
 	return meshInstance

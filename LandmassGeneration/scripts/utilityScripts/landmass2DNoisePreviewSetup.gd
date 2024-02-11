@@ -1,16 +1,16 @@
 extends Node2D
 
-@onready var noise_preview: TextureRect = $noisePreview
+@onready var noise_preview: TextureRect = %noisePreview
 var chunk : MeshInstance3D
 
 
 var generationData : Dictionary = {
-	 "width" : 128,
-	"height" : 128,
-	"scale" : 0.1,
-	"octaves" : 4,
+	 "width" : 256,
+	"height" : 256,
+	"scale" : 0.9,
+	"octaves" : 3,
 	"persistance" : 0.5,
-	"lacunarity" : 3.0,
+	"lacunarity" : 3.8,
 }
 var finalValues : Dictionary = {
 	
@@ -18,7 +18,6 @@ var finalValues : Dictionary = {
 
 func _ready() -> void:
 	noiseGenerator._fastNoiseLite_initializer()
-	noise_preview.scale = scale*5
 	_setup_noise_preview_node()
 
 func _setup_noise_preview_node() -> void:
@@ -54,11 +53,12 @@ func _on_button_pressed() -> void:
 	chunk = landmassGenerator._triangulatedQuad(generationData.get("width"), generationData.get("height"))
 	var mater = StandardMaterial3D.new()
 	
-	mater.albedo_color = Color.AQUA
+	mater.albedo_color = Color.SANDY_BROWN
+	chunk.material_override = mater
 	
-	var world = get_node_or_null("/root/world")
+	var world = get_node_or_null("/root/world/meshes")
 	world.add_child(chunk)
-
-#func _process(delta: float) -> void:
-	#if mesh:
-		#mesh.rotate_x(-0.5 * delta)
+	var scene = load("res://LandmassGeneration/scenes/player.tscn") as PackedScene
+	var playerInstance = scene.instantiate()
+	world.add_child(playerInstance)
+	playerInstance.get_node_or_null("/root/world/meshes/player").position = Vector3(64,20,80)
